@@ -120,17 +120,20 @@ public class ProdutosDAO {
 
 
       public List<ProdutosDTO> listarProdutosVendidos() {
-    String sql = "SELECT * FROM produtos WHERE status = 'Vendido'";
+    
+          String sql = "SELECT * FROM produtos WHERE status = 'Vendido'";
+    
     
     List<ProdutosDTO> lista = new ArrayList<>();
     PreparedStatement prep = null;
     ResultSet resultset = null;
     
+    
     try {
-        // INICIALIZA A CONEXÃO PRIMEIRO (Evita o erro de "this.conn is null")
+       
         conn = new conectaDAO().connectDB();
         
-        // AGORA PREPARA O SQL USANDO A CONEXÃO VÁLIDA
+        
         prep = conn.prepareStatement(sql);
         resultset = prep.executeQuery();
         
@@ -139,15 +142,19 @@ public class ProdutosDAO {
             
             
             produto.setNome(resultset.getString("nome"));
-           
+     
+            
             produto.setStatus(resultset.getString("status"));
+            
             
             lista.add(produto);
         }
+    
         
     } catch (Exception e) {
         System.out.println("Erro ao listar produtos vendidos: " + e.getMessage());
     } finally {
+        
         try {
             if (resultset != null) resultset.close();
             if (prep != null) prep.close();
@@ -156,6 +163,7 @@ public class ProdutosDAO {
             System.out.println("Erro ao fechar recursos: " + e.getMessage());
         }
     }
+    
     
     return lista;
 }

@@ -10,60 +10,48 @@ import javax.swing.table.DefaultTableModel;
  
 public class vendasVIEW extends javax.swing.JFrame {
    
-    
 private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(vendasVIEW.class.getName());
-  
  
  ProdutosDTO pd = new ProdutosDTO();
 
     public vendasVIEW() {
         initComponents();
-        listarProdutos(); // Executa a busca assim que a tela é aberta
+        listarProdutos(); 
     }
 
-    // Método responsável por buscar os dados e preencher a JTable
+    
     private void listarProdutos() {
+        
         try {
             ProdutosDAO produtosdao = new ProdutosDAO();
             
-            // Obtém o modelo da tabela (substitua 'listaProdutos' pelo nome da sua JTable)
+            
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             String[] colunas = {"Nome", "Status"};
             model.setColumnIdentifiers(colunas);
-            model.setNumRows(0); // Limpa a tabela para não duplicar dados
+            model.setNumRows(0); 
             
-            // Chama o método que criamos no DAO filtrando por "Vendido"
+            
             List<ProdutosDTO> lista = produtosdao.listarProdutosVendidos();
             
-            // Adiciona os dados na tabela linha por linha
+            
             
             for (int i = 0; i < lista.size(); i++) {
        
                 model.addRow(new Object[]{
                     
-                  
-                    
                    lista.get(i).getNome(),
                     lista.get(i).getStatus()
                             
                              });
-            
             }
         
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao listar produtos vendidos: " + e.getMessage());
         }
     }
+     
 
-
-
-    
-
-    
-    
-    
-    
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -129,6 +117,8 @@ private static final java.util.logging.Logger logger = java.util.logging.Logger.
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        listagemVIEW l = new listagemVIEW();
        l.setVisible(true);
+       
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
